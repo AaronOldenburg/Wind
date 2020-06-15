@@ -10,8 +10,13 @@ extents = Vector3( 0.100556, 0.0990549, 0.100415 )
 
 [sub_resource type="PrismMesh" id=3]
 
-[node name="Block" type="RigidBody"]
+[node name="Block" type="RigidBody" groups=[
+"blocks",
+]]
+collision_layer = 4
+collision_mask = 2
 gravity_scale = 0.0
+continuous_cd = true
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -23,6 +28,7 @@ material/0 = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Pointer" type="MeshInstance" parent="."]
-transform = Transform( 0.0276294, 0, 0, 0, -1.32609e-09, -0.0303373, 0, 0.0794995, -3.47503e-09, 0, 0, 0.179803 )
+transform = Transform( -0.0276294, -2.59042e-08, 1.6105e-15, 0, -1.29521e-08, -0.0303373, 9.00279e-09, -0.0794995, 4.94257e-09, 0, 0, -0.157421 )
 mesh = SubResource( 3 )
 material/0 = null
+[connection signal="body_entered" from="." to="." method="_on_Block_body_entered"]

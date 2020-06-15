@@ -32,6 +32,7 @@ singletons=[ "res://addons/godot_ovrmobile/godot_ovrmobile.gdnlib" ]
 
 3d_physics/layer_1="player"
 3d_physics/layer_2="world"
+3d_physics/layer_3="blocks"
 
 [physics]
 

@@ -20,6 +20,7 @@ axis_lock_linear_z = true
 script = ExtResource( 2 )
 
 [node name="Area" type="Area" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 2 )

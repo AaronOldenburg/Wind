@@ -22,6 +22,9 @@ func _process(delta):
 	last_hand_pos = hand_interacting.translation
 
 func _on_Area_body_entered(body):
+	if !body.is_in_group("hand"):
+		return
+	
 	hand_interacting = body.get_parent()
 	
 	hands_in_ball+=1
@@ -29,15 +32,15 @@ func _on_Area_body_entered(body):
 
 
 func _on_Area_body_exited(body):
+#	if body.is_in_group("blocks"):
+#		body.affected_by_gravity = false
+	
+	if !body.is_in_group("hand"):
+		return
+
 	if body.get_parent() == hand_interacting:
 		hand_interacting = null
 		
 	hands_in_ball-=1
 #	if hands_in_ball == 0:
 #		$MeshInstance.material_override = mat_main
-
-
-	pass # Replace with function body.
-
-
-	pass # Replace with function body.
