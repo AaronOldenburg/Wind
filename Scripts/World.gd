@@ -1,19 +1,23 @@
 extends RigidBody
 
+const FRICTION = .98
+const TURN_SPEED = 300
+
 var hands_in_ball: int = 0
 var hand_interacting : ARVRController = null
 var last_hand_pos : Vector3
-var turn_speed = 500
 
 var mat_main = preload("res://Graphics/Materials/Body.material")
 var mat_interact = preload("res://Graphics/Materials/world-interacting.material")
 
 func _process(delta):
+	self.angular_velocity = angular_velocity * FRICTION
+	
 	if hand_interacting == null:
 		return
 	
 	var movement = hand_interacting.translation - last_hand_pos
-	self.angular_velocity = Vector3(0,movement.x * turn_speed,movement.y)
+	self.angular_velocity = Vector3(-movement.y * TURN_SPEED, movement.x * TURN_SPEED, 0)
 	
 	last_hand_pos = hand_interacting.translation
 
