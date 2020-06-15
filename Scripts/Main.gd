@@ -1,4 +1,4 @@
-extends Spatial
+3extends Spatial
 
 onready var ovr_init_config = preload("res://addons/godot_ovrmobile/OvrInitConfig.gdns").new()
 onready var ovr_performance = preload("res://addons/godot_ovrmobile/OvrPerformance.gdns").new()
