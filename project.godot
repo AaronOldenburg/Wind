@@ -28,6 +28,11 @@ window/size/height=540
 
 singletons=[ "res://addons/godot_ovrmobile/godot_ovrmobile.gdnlib" ]
 
+[layer_names]
+
+3d_physics/layer_1="player"
+3d_physics/layer_2="world"
+
 [physics]
 
 common/physics_fps=72

@@ -11,6 +11,7 @@ radius = 0.107014
 controller_id = 2
 
 [node name="RigidBody" type="RigidBody" parent="."]
+collision_mask = 2
 mass = 0.510204
 gravity_scale = 0.0
 axis_lock_linear_x = true
