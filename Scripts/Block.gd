@@ -21,7 +21,7 @@ func initialize_position():
 func reparent():
 	get_parent().remove_child(self)
 	world.add_child(self)
-	look_at(world.translation)
+	look_at(world.translation, UP)
 
 #func _integrate_forces(state):
 ##	apply_central_impulse(transform.basis.z * -1)
