@@ -20,16 +20,7 @@ func _ready():
 
 func _process(delta):
 	self.angular_velocity = angular_velocity * FRICTION
-	
-	# ask if trigger pressed
-	# find out if trigger pressed corresponds to a hand that is in sphere
-	# assign hand_interacting
-	# set last_hand_pos
-	
-	# ask if trigger released
-	# find out if trigger released corresponds to a hand that is in sphere
-	
-	
+		
 	if hand_interacting == null:
 		return
 	var movement = hand_interacting.translation - last_hand_pos
@@ -45,25 +36,16 @@ func _on_Area_body_entered(body):
 	if !body.is_in_group("hand"):
 		return
 	
-#	hand_interacting = body.get_parent()
-
 	if body.is_in_group("left"):
 		left_hand_in_ball = true
 	elif body.is_in_group("right"):
 		right_hand_in_ball = true
 	
-#	hands_in_ball+=1
 	$MeshInstance.material_override = mat_interact
-
 
 func _on_Area_body_exited(body):
 	if !body.is_in_group("hand"):
 		return
-
-#	if body.get_parent() == hand_interacting:
-#		hand_interacting = null
-		
-#	hands_in_ball-=1
 
 	if body.is_in_group("left"):
 		left_hand_in_ball = false
@@ -89,10 +71,4 @@ func _on_trigger_released(hand):
 	if hand == hand_interacting:
 		get_tree().call_group("blocks", "_on_world_released")
 		hand_interacting = null
-	
-#func _on_grip_pressed(hand):
-#	print (hand.name, " had grip pressed")
-#
-#func _on_grip_released(hand):
-#	print (hand.name, " had grip released")
 	

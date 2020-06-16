@@ -24,11 +24,5 @@ func _process(delta):
 			trigger_is_pressed = false
 			get_tree().call_group("interactable", "_on_trigger_released", self)
 		
-#	if is_button_pressed(JOY_VR_GRIP):
-#		if !grip_is_pressed:
-#			grip_is_pressed = true
-#			get_tree().call_group("interactable", "_on_grip_pressed", self)
-#	else:
-#		if grip_is_pressed:
-#			grip_is_pressed = false
-#			get_tree().call_group("interactable", "_on_grip_released", self)
+	if is_button_pressed(JOY_OCULUS_MENU):
+		get_tree().reload_current_scene()
