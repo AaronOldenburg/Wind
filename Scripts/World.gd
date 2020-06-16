@@ -87,7 +87,7 @@ func _on_trigger_pressed(hand):
 
 func _on_trigger_released(hand):
 	if hand == hand_interacting:
-		print (hand_interacting, " is no longer interacting")
+		get_tree().call_group("blocks", "_on_world_released")
 		hand_interacting = null
 	
 #func _on_grip_pressed(hand):
