@@ -10,12 +10,14 @@ radius = 0.107014
 
 [node name="RightHand" type="ARVRController" groups=[
 "hand",
+"right",
 ]]
 controller_id = 2
 script = ExtResource( 2 )
 
 [node name="RigidBody" type="RigidBody" parent="." groups=[
 "hand",
+"right",
 ]]
 collision_mask = 2
 mass = 0.510204
@@ -29,5 +31,7 @@ transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody" groups=[
+"right",
+]]
 shape = SubResource( 2 )

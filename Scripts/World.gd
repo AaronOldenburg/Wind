@@ -47,7 +47,10 @@ func _on_Area_body_entered(body):
 	
 #	hand_interacting = body.get_parent()
 
-	# figure out which hand entered, set its bool
+	if body.is_in_group("left"):
+		left_hand_in_ball = true
+	elif body.is_in_group("right"):
+		right_hand_in_ball = true
 	
 #	hands_in_ball+=1
 	$MeshInstance.material_override = mat_interact
@@ -62,22 +65,34 @@ func _on_Area_body_exited(body):
 		
 #	hands_in_ball-=1
 
-	# figure out which hand exited, set its bool
+	if body.is_in_group("left"):
+		left_hand_in_ball = false
+	elif body.is_in_group("right"):
+		right_hand_in_ball = false
+
 	# find out if this is the hand that was interacting, consider releasing sphere (or not)
 
-	# change the following to ask about each hand's bool
-	if hands_in_ball == 0:
+	if !left_hand_in_ball && !right_hand_in_ball:
 		$MeshInstance.material_override = mat_main
 
 func _on_trigger_pressed(hand):
-	print (hand.name, " had trigger pressed")
+	if hand.name == "LeftHand" && left_hand_in_ball:
+		hand_interacting = hand
+		last_hand_pos = hand.translation
+	elif hand.name == "RightHand" && right_hand_in_ball:
+		hand_interacting = hand
+		last_hand_pos = hand.translation
+	
+	print ("Hand interacting is ", hand_interacting)
 
 func _on_trigger_released(hand):
-	print (hand.name, " had trigger released")
+	if hand == hand_interacting:
+		print (hand_interacting, " is no longer interacting")
+		hand_interacting = null
 	
-func _on_grip_pressed(hand):
-	print (hand.name, " had grip pressed")
-	
-func _on_grip_released(hand):
-	print (hand.name, " had grip released")
+#func _on_grip_pressed(hand):
+#	print (hand.name, " had grip pressed")
+#
+#func _on_grip_released(hand):
+#	print (hand.name, " had grip released")
 	
