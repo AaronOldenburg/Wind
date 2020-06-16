@@ -13,14 +13,14 @@ func _ready():
 	initialize_position()
 	
 func initialize_position():
-	translation = world.translation
-	rotation_degrees = Vector3(90,90,45)
+	translation = Vector3.ZERO
+	rotation_degrees = Vector3(randi() % 360, randi() % 360, randi() % 360)
 	translate(Vector3(0,0,radius))
 	call_deferred("reparent")
 	
 func reparent():
-	get_parent().remove_child(self)
-	world.add_child(self)
+#	get_parent().remove_child(self)
+#	world.add_child(self)
 	look_at(world.translation, UP)
 
 #func _integrate_forces(state):
