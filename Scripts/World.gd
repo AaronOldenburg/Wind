@@ -54,8 +54,8 @@ func _on_Area_body_exited(body):
 
 	# find out if this is the hand that was interacting, consider releasing sphere (or not)
 
-	if !left_hand_in_ball && !right_hand_in_ball:
-		$MeshInstance.material_override = mat_main
+#	if !left_hand_in_ball && !right_hand_in_ball:
+#		$MeshInstance.material_override = mat_main
 
 func _on_trigger_pressed(hand):
 	if hand.name == "LeftHand" && left_hand_in_ball:
