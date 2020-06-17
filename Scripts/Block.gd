@@ -13,10 +13,10 @@ var flying = false
 func _ready():
 	initialize_position()
 
-func _process(delta):
-	if flying:
-		if self.translation.distance_to(world.translation) > world.universe_boundary:
-			freeze()
+#func _process(delta):
+#	if flying:
+#		if self.translation.distance_to(world.translation) > world.universe_boundary:
+#			freeze()
 
 func initialize_position():
 	translation = Vector3.ZERO
@@ -35,7 +35,12 @@ func _on_world_released():
 	$Deferred_changes.wait_time = randf()
 	$Deferred_changes.start()
 	
+	flying = true
+	get_parent().remove_child(self)
+	block_constellation.add_child(self)
 	linear_velocity = -world.angular_velocity * self.rotation * FLING_DAMPING
+	
+	$Destruct_timer.start()
 	
 	
 func _on_Block_body_entered(body):
@@ -43,6 +48,7 @@ func _on_Block_body_entered(body):
 		if body.mode == MODE_STATIC:
 			freeze()
 
+# Now unused
 func freeze():
 	flying = false
 	mode = RigidBody.MODE_STATIC
@@ -54,9 +60,10 @@ func freeze():
 	get_tree().call_group("world", "_on_flung_block_stopped")
 	
 
-
 func _on_Deferred_changes_timeout():
-	flying = true
-	get_parent().remove_child(self)
-	block_constellation.add_child(self)
 	set_collision_mask_bit(2, true)
+
+
+func _on_Destruct_timer_timeout():
+	get_tree().call_group("world", "_on_flung_block_stopped")
+	queue_free()
