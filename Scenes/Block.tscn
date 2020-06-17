@@ -34,4 +34,7 @@ transform = Transform( -0.0276294, -2.59042e-08, 1.6105e-15, 0, -1.29521e-08, -0
 visible = false
 mesh = SubResource( 3 )
 material/0 = null
+
+[node name="Deferred_changes" type="Timer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_Block_body_entered"]
+[connection signal="timeout" from="Deferred_changes" to="." method="_on_Deferred_changes_timeout"]

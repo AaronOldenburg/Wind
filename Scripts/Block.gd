@@ -17,13 +17,6 @@ func _process(delta):
 	if flying:
 		if self.translation.distance_to(world.translation) > world.universe_boundary:
 			freeze()
-#			linear_velocity = Vector3.ZERO
-#			angular_velocity = Vector3.ZERO
-#			axis_lock_angular_x = true
-#			axis_lock_angular_y = true
-#			axis_lock_angular_z = true
-#			axis_lock_linear_x = true
-#			axis
 
 func initialize_position():
 	translation = Vector3.ZERO
@@ -38,11 +31,15 @@ func _on_world_released():
 	if !affected_by_world:
 		return
 
-	set_collision_mask_bit(2, true)
+	randomize()
+	$Deferred_changes.wait_time = randf()
+	$Deferred_changes.start()
+	
 	get_parent().remove_child(self)
 	block_constellation.add_child(self)
 	linear_velocity = -world.angular_velocity * self.rotation * FLING_DAMPING
 	flying = true
+	
 	
 func _on_Block_body_entered(body):
 	if body.is_in_group("blocks"):
@@ -52,7 +49,12 @@ func _on_Block_body_entered(body):
 func freeze():
 	flying = false
 	mode = RigidBody.MODE_STATIC
-	contact_monitor = false
+	continuous_cd = false
 	contacts_reported = 0
+	contact_monitor = false
 	get_tree().call_group("world", "_on_flung_block_stopped")
 	
+
+
+func _on_Deferred_changes_timeout():
+	set_collision_mask_bit(2, true)
