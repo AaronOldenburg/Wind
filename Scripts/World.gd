@@ -11,6 +11,7 @@ var left_hand_in_ball: bool = false
 var right_hand_in_ball: bool = false
 var hand_interacting : ARVRController = null
 var last_hand_pos : Vector3
+var blocks_are_flung : bool = false
 
 var mat_main = preload("res://Graphics/Materials/Body.material")
 var mat_interact = preload("res://Graphics/Materials/world-interacting.material")
@@ -54,8 +55,8 @@ func _on_Area_body_exited(body):
 
 	# find out if this is the hand that was interacting, consider releasing sphere (or not)
 
-#	if !left_hand_in_ball && !right_hand_in_ball:
-#		$MeshInstance.material_override = mat_main
+	if !left_hand_in_ball && !right_hand_in_ball:
+		$MeshInstance.material_override = mat_main
 
 func _on_trigger_pressed(hand):
 	if hand.name == "LeftHand" && left_hand_in_ball:
@@ -70,5 +71,10 @@ func _on_trigger_pressed(hand):
 func _on_trigger_released(hand):
 	if hand == hand_interacting:
 		get_tree().call_group("blocks", "_on_world_released")
+		blocks_are_flung = true
 		hand_interacting = null
 	
+func _on_flung_block_stopped():
+	if blocks_are_flung:
+		create_blocks(num_blocks)
+		blocks_are_flung = false

@@ -8,15 +8,20 @@ onready var block_constellation = get_node("/root/Main/Blocks")
 onready var radius = world.scale.x
 
 var affected_by_world = true
-#var flying = false
+var flying = false
 
 func _ready():
 	initialize_position()
-	
-#func _physics_process(delta):
-#	if flying:
-#		add_force(Vector3(0,0,1), UP)
-	
+
+func _process(delta):
+	if flying:
+		if self.translation.distance_to(world.translation) > world.universe_boundary:
+			flying = false
+			linear_velocity = Vector3.ZERO
+			angular_velocity = Vector3.ZERO
+			# lock linear velocity?
+			get_tree().call_group("world", "_on_flung_block_stopped")
+
 func initialize_position():
 	translation = Vector3.ZERO
 	rotation_degrees = Vector3(randi() % 360, randi() % 360, randi() % 360)
@@ -29,14 +34,11 @@ func reparent():
 func _on_world_released():
 	if !affected_by_world:
 		return
-		
+
 	get_parent().remove_child(self)
 	block_constellation.add_child(self)
-#	apply_central_impulse(self.rotation_degrees
-#			* FLING_DAMPING)
 	linear_velocity = -world.angular_velocity * self.rotation * FLING_DAMPING
-#	add_central_force()
-#	flying = true
+	flying = true
 	
 func _on_Block_body_entered(body):
 	pass
