@@ -21,6 +21,7 @@ axis_lock_linear_x = true
 axis_lock_linear_y = true
 axis_lock_linear_z = true
 script = ExtResource( 2 )
+universe_boundary = 5
 
 [node name="Area" type="Area" parent="."]
 collision_layer = 2
