@@ -35,10 +35,7 @@ func _on_world_released():
 	$Deferred_changes.wait_time = randf()
 	$Deferred_changes.start()
 	
-	get_parent().remove_child(self)
-	block_constellation.add_child(self)
 	linear_velocity = -world.angular_velocity * self.rotation * FLING_DAMPING
-	flying = true
 	
 	
 func _on_Block_body_entered(body):
@@ -51,10 +48,15 @@ func freeze():
 	mode = RigidBody.MODE_STATIC
 	continuous_cd = false
 	contacts_reported = 0
-	contact_monitor = false
+#	sleeping = true
+	linear_velocity = Vector3.ZERO
+	call_deferred("set_contact_monitor", false)
 	get_tree().call_group("world", "_on_flung_block_stopped")
 	
 
 
 func _on_Deferred_changes_timeout():
+	flying = true
+	get_parent().remove_child(self)
+	block_constellation.add_child(self)
 	set_collision_mask_bit(2, true)
