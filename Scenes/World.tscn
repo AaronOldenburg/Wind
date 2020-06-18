@@ -36,6 +36,7 @@ material/0 = ExtResource( 1 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 3 )
-unit_size = 0.2
+unit_size = 0.1
+autoplay = true
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]

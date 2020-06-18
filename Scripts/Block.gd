@@ -27,7 +27,7 @@ func initialize_position():
 	
 func initialize_audio():
 	randomize()
-	$AudioStreamPlayer3D.pitch_scale = rand_range(0.1,2.0)
+	$AudioLoop.pitch_scale = rand_range(0.1,2.0)
 	
 func reparent():
 	look_at(world.translation, UP)
@@ -44,6 +44,9 @@ func _on_world_released():
 	get_parent().remove_child(self)
 	block_constellation.add_child(self)
 	linear_velocity = -world.angular_velocity * self.rotation * FLING_DAMPING
+	
+	$EjectSound.pitch_scale = rand_range(0,2)
+	$EjectSound.play()
 	
 	$Destruct_timer.start()
 	
