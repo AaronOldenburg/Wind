@@ -12,6 +12,7 @@ var flying = false
 
 func _ready():
 	initialize_position()
+	initialize_audio()
 
 #func _process(delta):
 #	if flying:
@@ -23,6 +24,10 @@ func initialize_position():
 	rotation_degrees = Vector3(randi() % 360, randi() % 360, randi() % 360)
 	translate(Vector3(0,0,radius))
 	call_deferred("reparent")
+	
+func initialize_audio():
+	randomize()
+	$AudioStreamPlayer3D.pitch_scale = rand_range(0.1,2.0)
 	
 func reparent():
 	look_at(world.translation, UP)

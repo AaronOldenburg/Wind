@@ -2,6 +2,7 @@ extends RigidBody
 
 const FRICTION = .98
 const TURN_SPEED = 300
+const RELEASE_THRESHOLD = 2
 
 export var num_blocks = 10
 export var universe_boundary = 10
@@ -14,7 +15,9 @@ var last_hand_pos : Vector3
 var blocks_are_flung : bool = false
 
 var mat_main = preload("res://Graphics/Materials/Body.material")
-var mat_interact = preload("res://Graphics/Materials/world-interacting.material")
+#var mat_interact = preload("res://Graphics/Materials/world-interacting.material")
+#var mat_interact = preload("res://Graphics/Materials/world-interacting-1.material")
+#var mat_interact = preload("res://Graphics/Materials/Body-selected.material")
 
 func _ready():
 	create_blocks(num_blocks)
@@ -42,7 +45,7 @@ func _on_Area_body_entered(body):
 	elif body.is_in_group("right"):
 		right_hand_in_ball = true
 	
-	$MeshInstance.material_override = mat_interact
+#	$MeshInstance.material_override = mat_interact
 
 func _on_Area_body_exited(body):
 	if !body.is_in_group("hand"):
@@ -55,8 +58,8 @@ func _on_Area_body_exited(body):
 
 	# find out if this is the hand that was interacting, consider releasing sphere (or not)
 
-	if !left_hand_in_ball && !right_hand_in_ball:
-		$MeshInstance.material_override = mat_main
+#	if !left_hand_in_ball && !right_hand_in_ball:
+#		$MeshInstance.material_override = mat_main
 
 func _on_trigger_pressed(hand):
 	if hand.name == "LeftHand" && left_hand_in_ball:
@@ -70,9 +73,13 @@ func _on_trigger_pressed(hand):
 
 func _on_trigger_released(hand):
 	if hand == hand_interacting:
-		get_tree().call_group("blocks", "_on_world_released")
-		blocks_are_flung = true
+		var release_speed = Vector3.ZERO.distance_to(angular_velocity)
+		print("My speed: ", release_speed)
 		hand_interacting = null
+		
+		if release_speed > RELEASE_THRESHOLD:
+			get_tree().call_group("blocks", "_on_world_released")
+			blocks_are_flung = true
 	
 func _on_flung_block_stopped():
 	if blocks_are_flung:
