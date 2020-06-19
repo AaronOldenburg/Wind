@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Graphics/Materials/Body.material" type="Material" id=1]
 [ext_resource path="res://Scripts/LeftHand.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Hand-model.tscn" type="PackedScene" id=3]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -27,6 +28,7 @@ axis_lock_linear_z = true
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody"]
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+visible = false
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 
@@ -34,3 +36,6 @@ material/0 = ExtResource( 1 )
 "left",
 ]]
 shape = SubResource( 2 )
+
+[node name="hand_model" parent="RigidBody" instance=ExtResource( 3 )]
+transform = Transform( 0.125797, 0, 0, 0, 0.125797, 0, 0, 0, 0.125797, 0.00486948, -0.0996763, -0.0326848 )
