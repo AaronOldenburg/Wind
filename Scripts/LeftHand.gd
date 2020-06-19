@@ -18,10 +18,12 @@ func _process(delta):
 	if is_button_pressed(JOY_VR_TRIGGER) || is_button_pressed(JOY_VR_GRIP):
 		if !trigger_is_pressed:
 			trigger_is_pressed = true
+			$RigidBody/Hand_model_improved/AnimationPlayer.play("ArmatureAction") 
 			get_tree().call_group("interactable", "_on_trigger_pressed", self)
 	else:
 		if trigger_is_pressed:
 			trigger_is_pressed = false
+			$RigidBody/Hand_model_improved/AnimationPlayer.play_backwards("ArmatureAction")
 			get_tree().call_group("interactable", "_on_trigger_released", self)
 		
 	if is_button_pressed(JOY_OCULUS_MENU):

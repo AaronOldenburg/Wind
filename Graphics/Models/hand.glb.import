@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/hand.dae-6edb5ec8467227966dd2cd91bdf9673f.scn"
+path="res://.import/hand.glb-41aec4026362b98b7cbbd108b5ad52a6.scn"
 
 [deps]
 
-source_file="res://Graphics/Models/hand.dae"
-dest_files=[ "res://.import/hand.dae-6edb5ec8467227966dd2cd91bdf9673f.scn" ]
+source_file="res://Graphics/Models/hand.glb"
+dest_files=[ "res://.import/hand.glb-41aec4026362b98b7cbbd108b5ad52a6.scn" ]
 
 [params]
 
@@ -19,7 +19,7 @@ nodes/storage=0
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
-meshes/compress=false
+meshes/compress=true
 meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=0
