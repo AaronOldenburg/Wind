@@ -15,9 +15,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GodotWildJam-Quest"
+config/name="Wind"
 run/main_scene="res://Scenes/Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://Graphics/icon.png"
 
 [display]
 
