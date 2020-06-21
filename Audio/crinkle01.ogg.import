@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/crinkle01.ogg-a9f370e6a0e72ecdea020fa76955f791.oggstr"
+
+[deps]
+
+source_file="res://Audio/crinkle01.ogg"
+dest_files=[ "res://.import/crinkle01.ogg-a9f370e6a0e72ecdea020fa76955f791.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

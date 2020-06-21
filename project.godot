@@ -19,6 +19,10 @@ config/name="Wind"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://Graphics/icon.png"
 
+[autoload]
+
+FileGrabber="*res://Scripts/file_grabber.gd"
+
 [display]
 
 window/size/width=960

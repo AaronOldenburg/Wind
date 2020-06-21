@@ -26,6 +26,7 @@ func initialize_position():
 	call_deferred("reparent")
 	
 func initialize_audio():
+	$AudioLoop.stream = world.block_curr_sound
 	randomize()
 	$AudioLoop.pitch_scale = rand_range(0.1,2.0)
 	

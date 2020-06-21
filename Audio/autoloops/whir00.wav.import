@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/whir00.wav-bcf69e37eb9c05970b53942ab678e9a1.sample"
+path="res://.import/whir00.wav-619ce95909584922db9355913c3777f1.sample"
 
 [deps]
 
-source_file="res://Audio/whir00.wav"
-dest_files=[ "res://.import/whir00.wav-bcf69e37eb9c05970b53942ab678e9a1.sample" ]
+source_file="res://Audio/autoloops/whir00.wav"
+dest_files=[ "res://.import/whir00.wav-619ce95909584922db9355913c3777f1.sample" ]
 
 [params]
 

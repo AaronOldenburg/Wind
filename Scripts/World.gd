@@ -4,6 +4,15 @@ const FRICTION = .98
 const TURN_SPEED = 300
 const RELEASE_THRESHOLD = 2
 
+onready var block_sounds = [
+	"res://Audio/autoloops/back.ogg",
+	"res://Audio/autoloops/backwhir.ogg",
+	"res://Audio/autoloops/crinkle00.ogg",
+	"res://Audio/autoloops/moan00.ogg",
+	"res://Audio/autoloops/whir00.wav"
+]
+var block_curr_sound : AudioStream
+
 export var num_blocks = 10
 export var universe_boundary = 10
 
@@ -15,9 +24,11 @@ var last_hand_pos : Vector3
 var blocks_are_flung : bool = false
 
 var mat_main = preload("res://Graphics/Materials/Body.material")
-#var mat_interact = preload("res://Graphics/Materials/world-interacting.material")
-#var mat_interact = preload("res://Graphics/Materials/world-interacting-1.material")
-#var mat_interact = preload("res://Graphics/Materials/Body-selected.material")
+
+# For some reason, file_grabber is only seeing .import files, not .ogg
+#func _enter_tree():
+#	block_sounds = FileGrabber.get_files("res://Audio/autoloops/")
+	
 
 func _ready():
 	create_blocks(num_blocks)
@@ -32,6 +43,7 @@ func _process(delta):
 	last_hand_pos = hand_interacting.translation
 
 func create_blocks(number):
+	new_block_sound()
 	for n in number:
 		var block = preload("res://Scenes/Block.tscn").instance()
 		add_child(block)
@@ -85,3 +97,8 @@ func _on_flung_block_stopped():
 	if blocks_are_flung:
 		create_blocks(num_blocks)
 		blocks_are_flung = false
+
+func new_block_sound():
+	randomize()
+	var nextSound = load(block_sounds[randi() % block_sounds.size()])
+	block_curr_sound = nextSound
