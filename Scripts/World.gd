@@ -32,6 +32,7 @@ var mat_main = preload("res://Graphics/Materials/Body.material")
 
 func _ready():
 	create_blocks(num_blocks)
+	pass
 
 func _process(delta):
 	self.angular_velocity = angular_velocity * FRICTION
